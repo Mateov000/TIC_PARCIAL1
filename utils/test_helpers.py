@@ -6,6 +6,7 @@ from utils.helpers import (
     lista_info_desde_lista_probabilidades,
     entropia_desde_fuente,
     generar_extension_memoria_nula,
+    es_univocamente_decodificable
 )
 
 class TestHelpers(unittest.TestCase):
@@ -101,7 +102,11 @@ class TestHelpers(unittest.TestCase):
     def test_entropia_desde_fuente_empty(self):
         self.assertEqual(entropia_desde_fuente([]), 0)
 
-
+assert es_univocamente_decodificable({"0","10","110","111"}) is True   # prefijo
+assert es_univocamente_decodificable({"0","01"}) is True               # UD, no prefijo
+assert es_univocamente_decodificable({"0","01","1"}) is False          # no UD
+assert es_univocamente_decodificable(["a","a"]) is False               # singular
+assert es_univocamente_decodificable({"" ,"0"}) is False 
     
 
 if __name__ == "__main__":
